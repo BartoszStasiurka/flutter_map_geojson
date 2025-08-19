@@ -215,8 +215,8 @@ class GeoJsonParser {
           {
             markers.add(
               markerCreationCallback!(
-                  LatLng(f['geometry']['coordinates'][1] as double,
-                      f['geometry']['coordinates'][0] as double),
+                  LatLng((f['geometry']['coordinates'][1] as num).toDouble(),
+                      (f['geometry']['coordinates'][0] as num).toDouble()),
                   f['properties'] as Map<String, dynamic>),
             );
           }
@@ -225,8 +225,8 @@ class GeoJsonParser {
           {
             circles.add(
               circleMarkerCreationCallback!(
-                  LatLng(f['geometry']['coordinates'][1] as double,
-                      f['geometry']['coordinates'][0] as double),
+                  LatLng((f['geometry']['coordinates'][1] as num).toDouble(),
+                      (f['geometry']['coordinates'][0] as num).toDouble()),
                   f['properties'] as Map<String, dynamic>),
             );
           }
@@ -236,7 +236,8 @@ class GeoJsonParser {
             for (final point in f['geometry']['coordinates'] as List) {
               markers.add(
                 markerCreationCallback!(
-                    LatLng(point[1] as double, point[0] as double),
+                    LatLng((point[1] as num).toDouble(),
+                        (point[0] as num).toDouble()),
                     f['properties'] as Map<String, dynamic>),
               );
             }
@@ -246,7 +247,8 @@ class GeoJsonParser {
           {
             final List<LatLng> lineString = [];
             for (final coords in f['geometry']['coordinates'] as List) {
-              lineString.add(LatLng(coords[1] as double, coords[0] as double));
+              lineString.add(LatLng((coords[1] as num).toDouble(),
+                  (coords[0] as num).toDouble()));
             }
             polylines.add(polyLineCreationCallback!(
                 lineString, f['properties'] as Map<String, dynamic>));
@@ -257,8 +259,8 @@ class GeoJsonParser {
             for (final line in f['geometry']['coordinates'] as List) {
               final List<LatLng> lineString = [];
               for (final coords in line as List) {
-                lineString
-                    .add(LatLng(coords[1] as double, coords[0] as double));
+                lineString.add(LatLng((coords[1] as num).toDouble(),
+                    (coords[0] as num).toDouble()));
               }
               polylines.add(polyLineCreationCallback!(
                   lineString, f['properties'] as Map<String, dynamic>));
@@ -275,11 +277,12 @@ class GeoJsonParser {
               for (final coords in path as List<dynamic>) {
                 if (pathIndex == 0) {
                   // add to polygon's outer ring
-                  outerRing
-                      .add(LatLng(coords[1] as double, coords[0] as double));
+                  outerRing.add(LatLng((coords[1] as num).toDouble(),
+                      (coords[0] as num).toDouble()));
                 } else {
                   // add it to current hole
-                  hole.add(LatLng(coords[1] as double, coords[0] as double));
+                  hole.add(LatLng((coords[1] as num).toDouble(),
+                      (coords[0] as num).toDouble()));
                 }
               }
               if (pathIndex > 0) {
@@ -303,11 +306,12 @@ class GeoJsonParser {
                 for (final coords in path as List<dynamic>) {
                   if (pathIndex == 0) {
                     // add to polygon's outer ring
-                    outerRing
-                        .add(LatLng(coords[1] as double, coords[0] as double));
+                    outerRing.add(LatLng((coords[1] as num).toDouble(),
+                        (coords[0] as num).toDouble()));
                   } else {
                     // add it to a hole
-                    hole.add(LatLng(coords[1] as double, coords[0] as double));
+                    hole.add(LatLng((coords[1] as num).toDouble(),
+                        (coords[0] as num).toDouble()));
                   }
                 }
                 if (pathIndex > 0) {
